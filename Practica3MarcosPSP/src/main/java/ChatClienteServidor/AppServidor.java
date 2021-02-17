@@ -1,4 +1,4 @@
-package Buena;
+package ChatClienteServidor;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -18,8 +18,8 @@ public class AppServidor {
 
 			Socket socketCliente = servidor.accept();
 			AtiendeCliente atiendeCliente = new AtiendeCliente(socketCliente);
-			atiendeCliente.start();
 			System.out.println("Nuevo cliente");
+			atiendeCliente.start();
 
 		}
 
