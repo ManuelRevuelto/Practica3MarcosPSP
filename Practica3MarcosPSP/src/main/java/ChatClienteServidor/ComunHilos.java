@@ -1,6 +1,5 @@
 package ChatClienteServidor;
 
-import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
@@ -10,7 +9,7 @@ public class ComunHilos {
 
 	private int MAX_CONEXIONES, conexionesTotales, conexionesActuales;
 	private String mensajes;
-	private static ArrayList<Socket> tablaDeConexiones;
+	private static ArrayList<Socket> tablaDeConexiones = new ArrayList<>();
 
 	public ComunHilos(int MAX_CONEXIONES) {
 		this.MAX_CONEXIONES = MAX_CONEXIONES;
@@ -28,32 +27,23 @@ public class ComunHilos {
 		return mensajes;
 	}
 
-	public static void aniadir(Socket conexion) {
+	public synchronized void aniadir(Socket conexion) {
 
-		tablaDeConexiones = new ArrayList<Socket>();
 		tablaDeConexiones.add(conexion);
-		for (int i = 0; i < tablaDeConexiones.size(); i++) {
-			System.out.println(tablaDeConexiones.get(i));
-		}
+        notifyAll();
 
 	}
 
-	public static void aniadir(String mensaje, String nombreUsuario) {
+	public synchronized void aniadir(String mensaje, String nombreUsuario) {
 
-		for (int i = 0; i < tablaDeConexiones.size(); i++) {
-
-			DataInputStream entrada = null;
-			DataOutputStream salida = null;
+		for (Socket sc : tablaDeConexiones) {
+			DataOutputStream out = null;
 			try {
-				entrada = new DataInputStream(tablaDeConexiones.get(i).getInputStream());
-				salida = new DataOutputStream(tablaDeConexiones.get(i).getOutputStream());
+				out = new DataOutputStream(sc.getOutputStream());
+				out.writeUTF(mensaje);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-
-			
-			
-
 		}
 
 	}

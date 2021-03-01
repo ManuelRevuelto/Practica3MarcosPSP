@@ -17,7 +17,7 @@ public class AppServidor {
 		while (true) {
 
 			Socket socketCliente = servidor.accept();
-			AtiendeCliente atiendeCliente = new AtiendeCliente(socketCliente);
+			AtiendeCliente atiendeCliente = new AtiendeCliente(socketCliente, comunHilos);
 			System.out.println("Nuevo cliente");
 			atiendeCliente.start();
 
