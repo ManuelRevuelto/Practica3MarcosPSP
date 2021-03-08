@@ -30,7 +30,6 @@ public class ComunHilos {
 	public synchronized void aniadir(Socket conexion) {
 
 		tablaDeConexiones.add(conexion);
-        notifyAll();
 
 	}
 

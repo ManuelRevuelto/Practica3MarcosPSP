@@ -23,12 +23,13 @@ public class AtiendeCliente extends Thread {
 			comunHilos.aniadir(socket);
 			DataInputStream entrada = new DataInputStream(socket.getInputStream());
 			usuario = entrada.readUTF();
+			
 			System.out.println("[" + usuario + "] => " + entrada.readUTF());
 			
 			while (true) {
 				String mensajeDelCliente = entrada.readUTF();
 				System.out.println("[" + usuario + "] => " + mensajeDelCliente);
-				comunHilos.aniadir(mensajeDelCliente, usuario); 
+				comunHilos.aniadir(mensajeDelCliente, usuario);
 			}
 
 		} catch (IOException e) {

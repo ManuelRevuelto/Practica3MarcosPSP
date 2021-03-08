@@ -10,9 +10,10 @@ public class AppCliente {
 	private static final String HOST = "localhost";
 	private static final int PUERTO = 4444;
 	private static String mensaje;
-
+	private static Scanner ky = new Scanner(System.in);
+	
 	public static void main(String[] args) throws IOException {
-		Scanner ky = new Scanner(System.in);
+		
 
 		Socket clientSocket = new Socket(HOST, PUERTO);
 

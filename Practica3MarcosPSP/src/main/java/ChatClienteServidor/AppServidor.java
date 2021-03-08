@@ -8,9 +8,9 @@ public class AppServidor {
 
 	private static final int PUERTO = 4444;
 	private static final int MAX_CONEXIONES = 2;
-
+	private static ServerSocket servidor;
 	public static void main(String[] args) throws IOException {
-		ServerSocket servidor = new ServerSocket(PUERTO);
+		servidor = new ServerSocket(PUERTO);
 
 		System.out.println("Inicio de aplicación en el puerto " + PUERTO);
 		ComunHilos comunHilos = new ComunHilos(MAX_CONEXIONES);
